@@ -45,22 +45,28 @@ function compteRebours() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  totalSeconds = choice.value * 60;
-  minutes = Math.floor(totalSeconds / 60);
-  seconds = totalSeconds % 60;
 
-  if (active === true) {
-    return;
-    timeDisplay();
-    setTimeout(() => {
-      compteRebours();
-    }, 1000);
+  if (isNaN(choice.value)) {
+    alert("Entrez un chiffre avant que je me fâche");
   } else {
-    active = true;
+    totalSeconds = choice.value * 60;
+    choice.value = "";
+    minutes = Math.floor(totalSeconds / 60);
+    seconds = totalSeconds % 60;
 
-    timeDisplay();
-    setTimeout(() => {
-      compteRebours();
-    }, 1000);
+    if (active === true) {
+      return;
+      timeDisplay();
+      setTimeout(() => {
+        compteRebours();
+      }, 1000);
+    } else {
+      active = true;
+
+      timeDisplay();
+      setTimeout(() => {
+        compteRebours();
+      }, 1000);
+    }
   }
 });
